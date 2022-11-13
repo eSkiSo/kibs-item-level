@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+echo "### Kib's Item Level ###"
+echo "Release script running"
+echo -n "Specified tag: "
+
+TAG=$1
+
+if [ "${TAG}" == "" ]; then
+    echo "Missing tag parameter"
+    exit 1
+else
+    echo "${TAG}"
+fi
+
+echo -n "Tag availability: "
+
+if [ "$(git tag | grep "${TAG}")" == "${TAG}" ]; then
+    echo "NOT AVAILABLE"
+    exit 1
+else
+    echo "AVAILABLE"
+fi
+
+git tag "${TAG}" -m "- tagging as ${TAG}"
+git push --tags origin master

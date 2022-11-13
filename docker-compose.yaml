@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    shell:
+        build: ./shell/
+        volumes:
+                - "./:/project"
+                - "home:/root"
+
+volumes:
+    home:
+        driver: local
